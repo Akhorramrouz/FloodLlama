@@ -21,7 +21,7 @@ def get_svi_stats_and_tracts(state_abbr, county, theme, op, threshold):
         str: JSON string containing SVI statistics and census tract information.
     """
     # Set the file path and name of the shapefile
-    csv_path = r"C:\\Users\\kimia\\OneDrive\\Documents\\Python Scripts\\FloodLlama\\SVI_2022_US_county.csv"
+    csv_path = r"SVI_2022_US_county.csv"
 
     # Open the shapefile for reading
     data = pd.read_csv(csv_path)
