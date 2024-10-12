@@ -1,0 +1,91 @@
+"""<FUNCTIONS>{
+    "function": "get_svi_stats_and_tracts",
+    "description": "Retrieve Social Vulnerability Index (SVI) statistics based on user-specified criteria and display census tract on map with SVI index. State abbreviation, county, theme,                     operation and threshold must always be specified.",
+    "arguments": [
+        {
+            "name": "state_abbr",
+            "type": "string",
+            "description": "The state abbreviation (e.g., 'NJ')."
+        },
+        {
+            "name": "county",
+            "type": "string",
+            "description": "The county name (e.g., 'Middlesex')."
+        },
+        {
+            "name": "theme",
+            "type": "string",
+            "description": "The SVI theme to analyze. Choose from the following options:                                  - RPL_THEME1 (SVI for Socioeconomic Status theme);                                  - RPL_THEME2 (SVI for Household Characteristics theme);                                 - RPL_THEME3 (SVI for Racial and Ethnic Minority Status theme);                                 - RPL_THEME4 (SVI for Housing Type/Transportation theme);                                 - RPL_THEMES (Overall SVI)",
+            "enum": [
+                "RPL_THEME1",
+                "RPL_THEME2",
+                "RPL_THEME3",
+                "RPL_THEME4",
+                "RPL_THEMES"
+            ]
+        },
+        {
+            "name": "op",
+            "type": "string",
+            "description": "Operation of interest, e.g. less than, use '<'.",
+            "enum": [
+                "<",
+                "<=",
+                "=>",
+                ">"
+            ]
+        },
+        {
+            "name": "threshold",
+            "type": "number",
+            "description": "Threshold value for comparison from 0 to 1, e.g. 0.6. Vulnerability thresholds are: 'Low': 0.249, 'Low-Medium': 0.49, 'Medium-High': 0.50, 'High': 0.75. 90th percentile flag vulnerability is >=0.90 index score."
+        }
+    ]
+}{
+    "function": "get_flash_flood_warnings",
+    "description": "Get flash flood warnings for a given location using the National Weather Service (NWS) API.",
+    "arguments": [
+        {
+            "name": "location",
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "The state abbreviation in uppercase for which state you want to retrieve flash flood warnings (e.g., 'NJ'). Use 'null' or omit this parameter to search for flash flood warnings in the entire US."
+        }
+    ]
+}
+signature_get_flood_map = {
+    "name": "get_flood_map",
+    "description": "Directly display interactive flood map for a given location using FEMA Flood Map. User may also see the downloaded static flood map as 'output_static_map.png'. The map displayed has the following flood zone legends:A: An area with a 1% annual chance of flood; does not have base flood elevations (BFEs) available. B, X500:An area with at least a 0.2% chance of annual flood or with a 1% annual chance of flood with average depths less that one foot or with drainage area less than one square mile. (C is the older designation and X500 is the current designation. C, X: An area outside the 0.2% and 1% annual chance of flood regions. (C is the older designation and X500 is the current designation.) D: An area where flooding is possible but has not been studied. V:An area with a 1% annual chance flooding with velocity hazard due to waves; BFEs have are not available.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "latitude": {
+                "type": "number",
+                "description": "The latitude coordinate of interest in standard geographic coordinate system. For example, 34.071783. Please include negative numbers to represent directions."
+            },
+            "longitude": {
+                "type": "number",
+                "description": "The longitude coordinate of interest in standard geographic coordinate system. For example, -113.2596. Please include negative numbers to represent directions."
+            },
+            "zoom": {
+                "type": ["integer", "null"],
+                "description": "Integer parameter between 6 (low zoom) and 17 (high zoom). Use 'null' when zoom is not specified. "
+            }
+        }
+    }
+}
+signature_get_flood_data = {
+    "name": "get_flood_data",
+    "description": "Get Fema flood data by address. The query returns flood data for the provided address, including information about the flood zone, Special Flood Hazard Area (SFHA), and related details. Additionally, it provides geocoding information, such as the latitude, longitude, and match level for the given address.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "address": {
+                "type": "string",
+                "description": "The address of interest. Example: address=12 Maple Pl Mapleville KS 12345 address with street number, street type, city, state, zip and without punctuation. Do not include 4 digit zipcode extension."
+            }
+        }
+    }
+}</FUNCTIONS>"""
